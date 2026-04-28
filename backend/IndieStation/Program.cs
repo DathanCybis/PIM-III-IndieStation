@@ -122,13 +122,90 @@ void RealizarLogin()
 
 void MenuEquipe(int id, string nome)
 {
-    Console.Clear();
-    Console.WriteLine($"=== PAINEL DA EQUIPE: {nome.ToUpper()} ===");
-    Console.WriteLine("1. Ver Kanban (Tarefas)");
-    Console.WriteLine("2. Notas de Atualização");
-    Console.WriteLine("0. Sair");
-    Console.ReadKey(); // Placeholder para futuras implementações
+    bool logado = true;
+    while (logado)
+    {
+        Console.Clear();
+        Console.WriteLine($"=== PAINEL DA EQUIPE: {nome.ToUpper()} ===");
+        Console.WriteLine("1. Ver Kanban (Em breve)");
+        Console.WriteLine("2. Notas de Atualização (ATT)");
+        Console.WriteLine("0. Sair");
+        Console.Write("\nOpção: ");
+        
+        string op = Console.ReadLine()!;
+
+        if (op == "2")
+        {
+            MenuNotas(id);
+        }
+        else if (op == "0")
+        {
+            logado = false;
+        }
+    }
 }
+
+void MenuNotas(int equipeId)
+{
+    bool noMenuNotas = true;
+    while (noMenuNotas)
+    {
+        Console.Clear();
+        Console.WriteLine("--- GESTÃO DE NOTAS DE ATUALIZAÇÃO ---");
+        Console.WriteLine("1. Ver todas as notas");
+        Console.WriteLine("2. Adicionar nova nota");
+        Console.WriteLine("3. Editar nota");
+        Console.WriteLine("4. Excluir nota");
+        Console.WriteLine("0. Voltar");
+        Console.Write("\nOpção: ");
+        
+        string op = Console.ReadLine()!;
+
+        if (op == "1")
+        {
+            NotasManager.ListarNotas(equipeId);
+            Console.WriteLine("\nPressione qualquer tecla para continuar...");
+            Console.ReadKey();
+        }
+        else if (op == "2")
+        {
+            Console.Write("Título: ");
+            string t = Console.ReadLine()!;
+            Console.Write("Descrição: ");
+            string d = Console.ReadLine()!;
+            NotasManager.AdicionarNota(equipeId, t, d);
+            Console.ReadKey();
+        }
+        else if (op == "3")
+        {
+            NotasManager.ListarNotas(equipeId);
+            Console.Write("Digite o ID da nota que deseja EDITAR: ");
+            if (int.TryParse(Console.ReadLine(), out int idNota))
+            {
+                Console.Write("Novo Título: ");
+                string nt = Console.ReadLine()!;
+                Console.Write("Nova Descrição: ");
+                string nd = Console.ReadLine()!;
+                NotasManager.EditarNota(idNota, equipeId, nt, nd);
+            }
+            Console.ReadKey();
+        }
+        else if (op == "4")
+        {
+            NotasManager.ListarNotas(equipeId);
+            Console.Write("Digite o ID da nota que deseja EXCLUIR: ");
+            if (int.TryParse(Console.ReadLine(), out int idExcluir))
+            {
+                Console.Write("Tem certeza? (s/n): ");
+                if (Console.ReadLine()?.ToLower() == "s")
+                    NotasManager.ExcluirNota(idExcluir, equipeId);
+            }
+            Console.ReadKey();
+        }
+        else if (op == "0") noMenuNotas = false;
+    }
+}
+
 
 void MenuAdmin(int id, string nome)
 {

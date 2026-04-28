@@ -62,10 +62,21 @@ public class Database
             );";
         // O 'ON DELETE CASCADE' faz com que, se a equipe for excluída, os membros sumam automaticamente.
 
+        string sqlNotas = @"
+            CREATE TABLE IF NOT EXISTS notas_atualizacao (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                equipe_id INT,
+                titulo VARCHAR(150) NOT NULL,
+                descricao TEXT NOT NULL,
+                data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (equipe_id) REFERENCES equipes(id) ON DELETE CASCADE
+            );";
+
         ExecuteCommand(sqlEquipes, connection);
         ExecuteCommand(sqlTarefas, connection);
         ExecuteCommand(sqlExtrato, connection);
         ExecuteCommand(sqlMembros, connection);
+        ExecuteCommand(sqlNotas, connection);
         
         Console.WriteLine("--- IndieStation: Tabelas Verificadas ---");
     }
