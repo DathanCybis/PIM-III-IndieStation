@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IndieStation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d2ee738bbfd3b0b8b810bdb1d8b6d03646cf4ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+405b1505be4ad39764750b3b5293cc2a24a0c914")]
 [assembly: System.Reflection.AssemblyProductAttribute("IndieStation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IndieStation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
